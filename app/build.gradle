@@ -19,8 +19,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "CLIENT_ID", "chiraok.2d438d2efb56736aea7c282f6e1904b8244d707dff660a03c61c308aac814e82")
-        buildConfigField("String", "CLIENT_SECRET", "f4075f9ef7e054ee7fa70817fa70af775924262202aa9e1294be33b992c17a49")
+        buildConfigField("String", "CLIENT_ID", "\"chiraok.2d438d2efb56736aea7c282f6e1904b8244d707dff660a03c61c308aac814e82\"")
+        buildConfigField("String", "CLIENT_SECRET", "\"f4075f9ef7e054ee7fa70817fa70af775924262202aa9e1294be33b992c17a49\"")
     }
     buildTypes {
         release {

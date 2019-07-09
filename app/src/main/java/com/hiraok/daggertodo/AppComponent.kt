@@ -3,24 +3,27 @@ package com.hiraok.daggertodo
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
+        AndroidInjectionModule::class,
         AppModule::class,
-        NetWorkModule::class
+        NetWorkModule::class,
+        UseCaseModule::class
     ]
 )
-interface AppComponent : AndroidInjector<DaggerTodoApplication> {
+interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
+
         fun build(): AppComponent
     }
 
-    override fun inject(instance: DaggerTodoApplication)
+    fun inject(instance: DaggerTodoApplication)
 
 }

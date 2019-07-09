@@ -14,7 +14,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Module
-internal object NetWorkModule {
+class NetWorkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -34,11 +34,6 @@ internal object NetWorkModule {
             .build()
     }
 
-    private fun convertBase64(clientId: String, clientSecret: String): String {
-        val target = clientId + clientSecret
-        val charset = StandardCharsets.UTF_8
-        return Base64.getEncoder().encodeToString(target.toByteArray(charset))
-    }
 
     class HeaderInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response = chain.run {
@@ -48,6 +43,12 @@ internal object NetWorkModule {
                     .addHeader("Authorization: Basic", convertBase64(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET))
                     .build()
             )
+        }
+
+        private fun convertBase64(clientId: String, clientSecret: String): String {
+            val target = clientId + clientSecret
+            val charset = StandardCharsets.UTF_8
+            return Base64.getEncoder().encodeToString(target.toByteArray(charset))
         }
     }
 }
