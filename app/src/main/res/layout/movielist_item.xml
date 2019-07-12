@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="data"
-                type="com.hiraok.daggertodo.Movie"/>
+                type="com.hiraok.twitcasting_sample.Movie"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
