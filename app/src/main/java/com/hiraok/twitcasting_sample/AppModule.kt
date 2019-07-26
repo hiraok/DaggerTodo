@@ -5,9 +5,14 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
+@Module(
+    includes = [
+        UseCaseModule::class,
+        NetWorkModule::class
+    ]
+)
 class AppModule {
     @Singleton
     @Provides
-    fun provideContext(application: DaggerTodoApplication): Context = application
+    fun provideContext(application: TwitCastingSampleApplication): Context = application
 }
