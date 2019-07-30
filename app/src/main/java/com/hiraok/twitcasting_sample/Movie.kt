@@ -21,5 +21,5 @@ data class Movie(
     val maxViewCount: Int,
     val currentViewCount: Int,
     val totalViewCount: Int,
-    val hldUrl: String?
+    val hlsUrl: String?
 )

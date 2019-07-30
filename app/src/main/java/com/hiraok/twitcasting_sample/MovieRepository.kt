@@ -11,29 +11,29 @@ class MovieRepository @Inject constructor(
         return twitCastingApi.movies().map { response -> response.movies.map { it.toDomain() } }
     }
 
-    private fun MovieResponse.toDomain(): Movie {
+    private fun LiveResponse.toDomain(): Movie {
         return Movie(
-            id = MovieId(id),
-            userId = UserId(userId),
-            title = Title(title),
-            subTitle = SubTitle(subTitle),
-            lastOwnerComment = lastOwnerComment,
-            category = Category(category),
-            link = link,
-            isLive = isLive,
-            isRecorded = isRecorded,
-            commentCount = commentCount,
-            largeThumbnail = largeThumbnail,
-            smallThumbnail = smallThumbnail,
-            country = country,
-            duration = duration,
-            created = created,
-            isCollabo = isCollabo,
-            isProtected = isProtected,
-            maxViewCount = maxViewCount,
-            currentViewCount = currentViewCount,
-            totalViewCount = totalViewCount,
-            hldUrl = hlsUrl
+            id = MovieId(movie.id),
+            userId = UserId(movie.userId),
+            title = Title(movie.title),
+            subTitle = SubTitle(movie.subTitle),
+            lastOwnerComment = movie.lastOwnerComment,
+            category = Category(movie.category),
+            link = movie.link,
+            isLive = movie.isLive,
+            isRecorded = movie.isRecorded,
+            commentCount = movie.commentCount,
+            largeThumbnail = movie.largeThumbnail,
+            smallThumbnail = movie.smallThumbnail,
+            country = movie.country,
+            duration = movie.duration,
+            created = movie.created,
+            isCollabo = movie.isCollabo,
+            isProtected = movie.isProtected,
+            maxViewCount = movie.maxViewCount,
+            currentViewCount = movie.currentViewCount,
+            totalViewCount = movie.totalViewCount,
+            hlsUrl = movie.hlsUrl
         )
     }
 

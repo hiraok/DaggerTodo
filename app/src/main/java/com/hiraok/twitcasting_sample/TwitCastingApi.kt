@@ -2,6 +2,8 @@ package com.hiraok.twitcasting_sample
 
 import io.reactivex.Single
 import retrofit2.Retrofit
+import retrofit2.http.GET
+import retrofit2.http.Query
 import javax.inject.Inject
 
 class TwitCastingApi @Inject constructor(
@@ -10,11 +12,12 @@ class TwitCastingApi @Inject constructor(
 
     private val service = retrofit.create(TwitCastingService::class.java)
 
-    override fun movies(): Single<SearchLiveResponse> {
+    override fun movies(type: String, lang: String): Single<SearchLiveResponse> {
         return service.movies()
     }
 }
 
 interface TwitCastingService {
-    fun movies(): Single<SearchLiveResponse>
+    @GET("/search/lives")
+    fun movies(@Query("type") type: String = "recommend", @Query("lang") lang: String = "ja"): Single<SearchLiveResponse>
 }

@@ -2,13 +2,12 @@ package com.hiraok.twitcasting_sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.hiraok.twitcasting_sample.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -21,8 +20,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupToolber()
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, MovieListFragment())
+            .commit()
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
+
+    private fun setupToolber() {
+        setSupportActionBar(toolbar)
+    }
 }

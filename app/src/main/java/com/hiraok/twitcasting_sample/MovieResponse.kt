@@ -6,7 +6,7 @@ data class MovieResponse(
     @Json(name = "id") val id: String,
     @Json(name = "user_id") val userId: String,
     @Json(name = "title") val title: String,
-    @Json(name = "subTitle") val subTitle: String?,
+    @Json(name = "subtitle") val subTitle: String?,
     @Json(name = "last_owner_comment") val lastOwnerComment: String?,
     @Json(name = "category") val category: String?,
     @Json(name = "link") val link: String,
@@ -22,7 +22,6 @@ data class MovieResponse(
     @Json(name = "is_protected") val isProtected: Boolean,
     @Json(name = "max_view_count") val maxViewCount: Int,
     @Json(name = "current_view_count") val currentViewCount: Int,
-    @Json(name = "totalViewCount") val totalViewCount: Int,
+    @Json(name = "total_view_count") val totalViewCount: Int,
     @Json(name = "hls_url") val hlsUrl: String?
-
 )

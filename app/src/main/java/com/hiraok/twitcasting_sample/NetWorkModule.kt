@@ -1,15 +1,17 @@
 package com.hiraok.twitcasting_sample
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.nio.charset.StandardCharsets
 import java.util.*
 import javax.inject.Singleton
 
@@ -21,6 +23,8 @@ class NetWorkModule {
         return OkHttpClient
             .Builder()
             .addInterceptor(HeaderInterceptor())
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS })
+            .addNetworkInterceptor(StethoInterceptor())
             .build()
     }
 
@@ -29,7 +33,8 @@ class NetWorkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
+            .baseUrl("https://apiv2.twitcasting.tv")
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .build()
     }
@@ -40,15 +45,14 @@ class NetWorkModule {
             proceed(
                 request()
                     .newBuilder()
-                    .addHeader("Authorization: Basic", convertBase64(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET))
+                    .header("Authorization", "Basic " + convertBase64(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET))
                     .build()
             )
         }
 
         private fun convertBase64(clientId: String, clientSecret: String): String {
-            val target = clientId + clientSecret
-            val charset = StandardCharsets.UTF_8
-            return Base64.getEncoder().encodeToString(target.toByteArray(charset))
+            val target = "$clientId:$clientSecret"
+            return Base64.getEncoder().encodeToString(target.toByteArray())
         }
     }
 }
