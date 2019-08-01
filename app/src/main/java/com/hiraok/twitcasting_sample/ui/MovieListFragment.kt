@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hiraok.twitcasting_sample.viewmodel.MovieListViewModel
 import com.hiraok.twitcasting_sample.R
 import com.hiraok.twitcasting_sample.di.ViewModelFactory
 import com.hiraok.twitcasting_sample.databinding.FragmentMovieListBinding

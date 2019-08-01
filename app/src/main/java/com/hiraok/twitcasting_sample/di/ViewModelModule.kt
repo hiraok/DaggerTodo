@@ -2,7 +2,7 @@ package com.hiraok.twitcasting_sample.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hiraok.twitcasting_sample.viewmodel.MovieListViewModel
+import com.hiraok.twitcasting_sample.ui.MovieListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

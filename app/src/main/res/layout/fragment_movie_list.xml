@@ -10,7 +10,7 @@
 
         <variable
                 name="viewModel"
-                type="com.hiraok.twitcasting_sample.viewmodel.MovieListViewModel"/>
+                type="com.hiraok.twitcasting_sample.ui.MovieListViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

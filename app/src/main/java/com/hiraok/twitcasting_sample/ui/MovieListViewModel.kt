@@ -1,4 +1,4 @@
-package com.hiraok.twitcasting_sample.viewmodel
+package com.hiraok.twitcasting_sample.ui
 
 import android.app.Application
 import androidx.lifecycle.*
