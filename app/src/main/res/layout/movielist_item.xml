@@ -7,7 +7,7 @@
 
         <variable
                 name="data"
-                type="com.hiraok.twitcasting_sample.Movie"/>
+                type="com.hiraok.twitcasting_sample.domain.Movie"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

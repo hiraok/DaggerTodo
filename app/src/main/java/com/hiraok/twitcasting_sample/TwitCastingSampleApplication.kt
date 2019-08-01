@@ -3,6 +3,7 @@ package com.hiraok.twitcasting_sample
 import android.app.Activity
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.hiraok.twitcasting_sample.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

@@ -3,6 +3,7 @@ package com.hiraok.twitcasting_sample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.hiraok.twitcasting_sample.ui.MovieListFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
