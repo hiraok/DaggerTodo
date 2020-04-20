@@ -3,15 +3,14 @@ package com.hiraok.twitcasting_sample.infra
 import com.hiraok.twitcasting_sample.api.TwitCastingApi
 import com.hiraok.twitcasting_sample.api.response.LiveResponse
 import com.hiraok.twitcasting_sample.domain.*
-import io.reactivex.Single
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val twitCastingApi: TwitCastingApi
 ) : MovieRepository {
 
-    override fun movies(): Single<List<Movie>> {
-        return twitCastingApi.movies().map { response -> response.movies.map { it.toDomain() } }
+    override suspend fun movies(): List<Movie> {
+        return twitCastingApi.movies().map { it.toDomain() }
     }
 
     private fun LiveResponse.toDomain(): Movie {

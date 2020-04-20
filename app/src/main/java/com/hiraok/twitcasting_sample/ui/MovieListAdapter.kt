@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
@@ -34,6 +33,7 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
     }
 
     abstract class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
     class ItemViewHolder(
         private val parent: ViewGroup,
         private val binding: MovielistItemBinding = DataBindingUtil.inflate(
@@ -43,6 +43,10 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
             false
         )
     ) : ViewHolder(binding.root) {
+
+        val centerPosition: (ViewHolder) -> Int = {
+            it.layoutPosition
+        }
 
         fun bind(item: Movie) {
             // data setup
@@ -60,32 +64,13 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
             binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
             binding.playerView.player = player
         }
-
     }
-
 
     fun update(movies: List<Movie>) {
         this.movieList = movies
         notifyDataSetChanged()
     }
-}
-
-
-class Callback(
-    private val old: List<Movie>,
-    private val new: List<Movie>
-) : DiffUtil.Callback() {
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        old[oldItemPosition].id == new[newItemPosition].id
-
-    override fun getOldListSize(): Int = old.size
-
-
-    override fun getNewListSize(): Int = new.size
-
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old[oldItemPosition].title == new[newItemPosition].title
-    }
 
 }
+
+

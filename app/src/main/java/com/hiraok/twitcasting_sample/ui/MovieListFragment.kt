@@ -9,9 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hiraok.twitcasting_sample.R
-import com.hiraok.twitcasting_sample.di.ViewModelFactory
 import com.hiraok.twitcasting_sample.databinding.FragmentMovieListBinding
+import com.hiraok.twitcasting_sample.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -30,8 +31,10 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_movie_list, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_movie_list, container, false
+        )
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -40,10 +43,19 @@ class MovieListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel::class.java)
         binding.viewModel = viewModel
-        val manager = LinearLayoutManager(context)
-        binding.recyclerView.layoutManager = manager
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.adapter = MovieListAdapter()
+        binding.recyclerView.addOnScrollListener(scrollPosition)
         viewModel.init()
+    }
+
+    val scrollPosition = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            (binding.adapter as MovieListAdapter)
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        }
     }
 
 }

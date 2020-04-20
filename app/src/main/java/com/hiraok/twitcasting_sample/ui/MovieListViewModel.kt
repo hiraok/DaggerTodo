@@ -6,7 +6,6 @@ import com.hiraok.twitcasting_sample.domain.Movie
 import com.hiraok.twitcasting_sample.domain.MovieUseCase
 import com.shopify.livedataktx.SingleLiveData
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.await
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -21,7 +20,7 @@ class MovieListViewModel @Inject constructor(
     fun init() {
         try {
             viewModelScope.launch {
-                val movies = movieUseCase.movies().await()
+                val movies = movieUseCase.movies()
                 movieList.postValue(movies)
             }
         } catch (e: Exception) {
