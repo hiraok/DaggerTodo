@@ -6,11 +6,11 @@
 
         <variable
                 name="adapter"
-                type="com.hiraok.twitcasting_sample.ui.MovieListAdapter"/>
+                type="com.hiraok.chobit_casting.ui.MovieListAdapter"/>
 
         <variable
                 name="viewModel"
-                type="com.hiraok.twitcasting_sample.ui.MovieListViewModel"/>
+                type="com.hiraok.chobit_casting.ui.MovieListViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

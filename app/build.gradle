@@ -7,7 +7,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.hiraok.twitcasting_sample"
+        applicationId "com.hiraok.chobit_casting"
         minSdkVersion 27
         targetSdkVersion 29
         versionCode 1
