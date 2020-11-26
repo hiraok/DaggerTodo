@@ -1,5 +1,8 @@
 package com.hiraok.chobit_casting.domain
 
-interface MovieUseCase {
-    suspend fun movies(): List<Movie>
+import kotlinx.coroutines.flow.Flow
+
+
+interface GetMovieListUseCase {
+    suspend fun execute(): Flow<Result<List<Movie>>>
 }
