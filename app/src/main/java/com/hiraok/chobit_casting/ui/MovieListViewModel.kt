@@ -1,31 +1,36 @@
 package com.hiraok.chobit_casting.ui
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.hiraok.chobit_casting.domain.GetMovieListUseCase
 import com.hiraok.chobit_casting.domain.Movie
-import com.hiraok.chobit_casting.domain.MovieUseCase
-import com.shopify.livedataktx.SingleLiveData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class MovieListViewModel @Inject constructor(
     application: Application,
-    private val movieUseCase: MovieUseCase
+    private val usecase: GetMovieListUseCase
 ) : AndroidViewModel(application) {
 
-    val movieList = MutableLiveData<List<Movie>>()
-    private val singleError: SingleLiveData<Exception> = SingleLiveData()
+    private val _movieList = MutableStateFlow(emptyList<Movie>())
+    val movieList: StateFlow<List<Movie>> = _movieList
 
     fun init() {
-        try {
-            viewModelScope.launch {
-                val movies = movieUseCase.movies()
-                movieList.postValue(movies)
-            }
-        } catch (e: Exception) {
-            singleError.postValue(e)
-        }
+        viewModelScope.launch {
+            usecase.execute().collect {
+                it.onSuccess {
+                    _movieList.value = it
+                }
+                it.onFailure {
 
+                }
+            }
+        }
     }
 }
