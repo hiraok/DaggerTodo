@@ -14,6 +14,7 @@ import com.hiraok.chobit_casting.R
 import com.hiraok.chobit_casting.databinding.FragmentMovieListBinding
 import com.hiraok.chobit_casting.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 class MovieListFragment : Fragment() {
@@ -25,12 +26,16 @@ class MovieListFragment : Fragment() {
 
     lateinit var binding: FragmentMovieListBinding
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_movie_list, container, false
@@ -39,23 +44,16 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel::class.java)
         binding.viewModel = viewModel
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.adapter = MovieListAdapter()
-        binding.recyclerView.addOnScrollListener(scrollPosition)
+        binding.recyclerView.adapter = MovieListAdapter()
         viewModel.init()
     }
 
-    val scrollPosition = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            (binding.adapter as MovieListAdapter)
-        }
-
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-        }
-    }
 
 }
