@@ -5,12 +5,8 @@
     <data>
 
         <variable
-                name="adapter"
-                type="com.hiraok.chobit_casting.ui.MovieListAdapter"/>
-
-        <variable
                 name="viewModel"
-                type="com.hiraok.chobit_casting.ui.MovieListViewModel"/>
+                type="com.hiraok.chobit_casting.ui.MovieListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,14 +17,12 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:adapter="@{adapter}"
-                app:viewmodel="@{viewModel.movieList}"
+                app:viewmodel="@{viewModel.movieList.value}"
                 android:orientation="vertical"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                />
+                app:layout_constraintLeft_toLeftOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
