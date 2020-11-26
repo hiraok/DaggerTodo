@@ -5,9 +5,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class InfraModule {
+internal abstract class InfraModule {
     @Binds
-    abstract fun provideMovieRepository(
-        reposiotry: MovieRepositoryImpl
-    ): MovieRepository
+    abstract fun provideMovieRepository(reposiotry: MovieRepositoryImpl): MovieRepository
 }
