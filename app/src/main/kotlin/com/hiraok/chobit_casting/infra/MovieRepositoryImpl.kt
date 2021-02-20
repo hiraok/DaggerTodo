@@ -5,22 +5,22 @@ import com.hiraok.chobit_casting.api.TwitCastingApi
 import com.hiraok.chobit_casting.api.response.LiveResponse
 import com.hiraok.chobit_casting.domain.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val twitCastingApi: TwitCastingApi
 ) : MovieRepository {
 
-    val list = LruCache<String, List<Movie>>(100)
+    private val list = LruCache<String, Movie>(100)
 
-    override suspend fun findAll(): Flow<List<Movie>> = flow {
-        twitCastingApi.movies().map { it.toDomain() }
-    }
+    override suspend fun findAll(): Flow<List<Movie>> =
+        twitCastingApi.movies().map {
+            it.map { it.toDomain() }.onEach { list.put(it.id.id, it) }
+        }
 
-    override suspend fun findByMovieId(id: MovieId): Flow<Movie> = flow {
-        twitCastingApi.movies().find { it.movie.id == id.id }
-    }
+    override suspend fun findByMovieId(id: MovieId): Flow<Movie?> =
+        twitCastingApi.movies().map { it.find { id.id == it.movie.id }?.toDomain() }
 
     private fun LiveResponse.toDomain(): Movie {
         return Movie(
