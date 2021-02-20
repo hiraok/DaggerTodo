@@ -11,10 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.hiraok.chobit_casting.R
 import com.hiraok.chobit_casting.databinding.FragmentMovieListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
 
@@ -23,6 +21,15 @@ class MovieListFragment : Fragment() {
     private lateinit var adapter: MovieListAdapter
 
     private lateinit var binding: FragmentMovieListBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launchWhenResumed {
+            viewModel.movieList.collect {
+                adapter.submitList(it)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,18 +43,11 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        binding.viewModel = viewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         adapter = MovieListAdapter()
         binding.recyclerView.adapter = adapter
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.movieList.collect {
-                adapter.submitList(it)
-            }
-        }
     }
 
 }
