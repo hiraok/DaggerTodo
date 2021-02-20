@@ -2,6 +2,8 @@ package com.hiraok.chobit_casting.api
 
 import com.hiraok.chobit_casting.api.response.LiveResponse
 import com.hiraok.chobit_casting.api.response.SearchLiveResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,7 +14,9 @@ class TwitCastingApi @Inject constructor(
 ) {
     private val service = retrofit.create(TwitCastingService::class.java)
 
-    suspend fun movies(): List<LiveResponse> = service.movies().movies
+    suspend fun movies(): Flow<List<LiveResponse>> = flow {
+        emit(service.movies().movies)
+    }
 }
 
 interface TwitCastingService {
