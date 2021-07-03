@@ -1,9 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.4.30'
-    ext.navigationVersion = '2.3.3'
-    ext.hiltVersion = '2.31-alpha'
+    ext.kotlin_version = '1.5.20'
+    ext.hiltVersion = '2.37'
+    ext.navigationVersion = '2.3.5'
     repositories {
         google()
         jcenter()
@@ -11,7 +11,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
@@ -31,28 +31,46 @@ task clean(type: Delete) {
 }
 
 ext {
+    // androidX
     androidXVersion = '1.0.0'
-    androidXTestCoreVersion = '1.3.0'
-    androidXTestExtKotlinRunnerVersion = '1.1.2'
-    androidXTestRulesVersion = '1.3.0'
-    androidXAnnotations = '1.1.0'
-    appCompatVersion = '1.1.0'
-    archLifecycleVersion = '2.2.0'
-    liveDataKtxVersion = '2.3.0'
-    archTestingVersion = '2.1.0'
-    coroutinesVersion = '1.2.1'
-    fragmentVersion = '1.3.0'
-    fragmentKtxVersion = '1.3.0'
-    hamcrestVersion = '1.3'
-    hiltAndroidXVersion = '1.0.0-alpha03'
-    junitVersion = '4.13'
+    androidXAnnotationsVersion = '1.1.0'
+    // AAC
+    archLifecycleVersion = '2.3.1'
+    liveDataKtxVersion = '2.3.1'
+    fragmentVersion = '1.3.5'
+    fragmentKtxVersion = '1.3.5'
+    materialVersion = '1.4.0'
+    pagingVersion = '3.1.0-alpha02'
+    viewModelKtxVersion = '2.3.1'
+    shopifyLiveDataKtxVersion = '1.0.1'
+    // misc
     dexMakerVersion = '2.12.1'
-    materialVersion = '1.3.0'
+    appCompatVersion = '1.3.0'
+    constraintLayoutVersion = '2.0.4'
+    recyclerViewVersion = '1.2.1'
+    runtimeVersion = '1.1.1'
+    // exoPlayer
+    exoPlayerVersion = '2.14.1'
+    // Test
+    junit = '1.1.3'
+    junitVersion = '4.13'
     mockitoVersion = '2.19.0'
-    recyclerViewVersion = '1.1.0'
-    robolectricVersion = '4.3.1'
-    rulesVersion = '1.0.1'
+    espressoCore = '3.4.0'
     timberVersion = '4.7.1'
+    rulesVersion = '1.0.1'
     truthVersion = '1.0'
-    pagingVersion = "3.0.0-beta01"
+    robolectricVersion = '4.3.1'
+    archTestingVersion = '2.1.0'
+    hamcrestVersion = '1.3'
+    androidXTestCoreVersion = '1.4.0'
+    androidXTestExtKotlinRunnerVersion = '1.1.3'
+    androidXTestRulesVersion = '1.4.0'
+
+    // Kotlin
+    kotlinCoreKtx = '1.6.0'
+    kotlinCoroutines = '1.5.0'
+    coroutinesVersion = '1.2.1'
+    // Dagger Hilt
+    hiltAndroidXVersion = '1.0.0'
+    hiltViewModel = '1.0.0-alpha03'
 }
